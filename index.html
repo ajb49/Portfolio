@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asif Jamil | Oracle & Web Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4CAF50;
+      --primary-dark: #388E3C;
+      --secondary: #8BC34A;
+      --dark: #263238;
+      --darker: #1A2327;
+      --light: #ECEFF1;
+      --lighter: #FFFFFF;
+      --gray: #78909C;
+      --dark-gray: #37474F;
+      --light-gray: #CFD8DC;
+      --card-bg-dark: rgba(38, 50, 56, 0.9);
+      --card-bg-light: rgba(255, 255, 255, 0.9);
+      --text-dark: #E0E0E0;
+      --text-light: #455A64;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-dark);
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    body.light-mode {
+      color: var(--text-light);
+      background: url('https://images.unsplash.com/photo-1476231682828-37e571bc172f?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, rgba(26, 35, 39, 0.9) 0%, rgba(76, 175, 80, 0.2) 100%);
+      z-index: -1;
+    }
+
+    body.light-mode::before {
+      background: linear-gradient(135deg, rgba(236, 239, 241, 0.9) 0%, rgba(139, 195, 74, 0.2) 100%);
+    }
+
+    header {
+      background-color: rgba(26, 35, 39, 0.95);
+      padding: 1.5rem 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(55, 71, 79, 0.5);
+    }
+
+    body.light-mode header {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid rgba(207, 216, 220, 0.8);
+    }
+
+    header h1 {
+      font-size: 2.25rem;
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.25rem;
+    }
+
+    body.light-mode header h1 {
+      color: var(--primary-dark);
+    }
+
+    header p {
+      color: var(--gray);
+      margin-top: 0.25rem;
+      font-size: 1rem;
+      font-weight: 400;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    nav {
+      margin-top: 1.25rem;
+    }
+
+    nav a {
+      color: var(--light);
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    body.light-mode nav a {
+      color: var(--dark);
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    body.light-mode nav a:hover {
+      color: var(--primary-dark);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    body.light-mode nav a::after {
+      background-color: var(--primary-dark);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
+      position: relative;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    body.light-mode .section-title {
+      color: var(--primary-dark);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      bottom: -6px;
+      left: 0;
+      background: linear-gradient(90deg, var(--primary), transparent);
+      border-radius: 3px;
+    }
+
+    body.light-mode .section-title::after {
+      background: linear-gradient(90deg, var(--primary-dark), transparent);
+    }
+
+    .card {
+      background-color: var(--card-bg-dark);
+      padding: 1.5rem;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(76, 175, 80, 0.2);
+      flex: 1;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    body.light-mode .card {
+      background-color: var(--card-bg-light);
+      border: 1px solid rgba(207, 216, 220, 0.8);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(76, 175, 80, 0.15);
+      border-color: rgba(76, 175, 80, 0.4);
+    }
+
+    body.light-mode .card:hover {
+      box-shadow: 0 10px 25px rgba(56, 142, 60, 0.15);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: var(--primary);
+      color: var(--light);
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    body.light-mode .btn {
+      color: var(--lighter);
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+      box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    body.light-mode .btn-outline {
+      color: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(76, 175, 80, 0.1);
+    }
+
+    ul.skills {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    ul.skills li {
+      background-color: rgba(76, 175, 80, 0.1);
+      color: var(--primary);
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+
+    body.light-mode ul.skills li {
+      background-color: rgba(56, 142, 60, 0.1);
+      color: var(--primary-dark);
+      border: 1px solid rgba(56, 142, 60, 0.3);
+    }
+
+    ul.skills li:hover {
+      background-color: var(--primary);
+      color: var(--light);
+      transform: scale(1.03);
+    }
+
+    body.light-mode ul.skills li:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background-color: rgba(26, 35, 39, 0.95);
+      color: var(--gray);
+      font-size: 0.85rem;
+      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(55, 71, 79, 0.5);
+    }
+
+    body.light-mode footer {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid rgba(207, 216, 220, 0.8);
+    }
+
+    .project-list {
+      list-style: none;
+    }
+
+    .project-list li {
+      margin-bottom: 1.25rem;
+      padding-left: 1.25rem;
+      border-left: 2px solid var(--primary);
+    }
+
+    body.light-mode .project-list li {
+      border-left: 2px solid var(--primary-dark);
+    }
+
+    .project-list li strong {
+      color: var(--primary);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+
+    body.light-mode .project-list li strong {
+      color: var(--primary-dark);
+    }
+
+    .history-item {
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px dashed var(--dark-gray);
+    }
+
+    body.light-mode .history-item {
+      border-bottom: 1px dashed var(--light-gray);
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .history-item h3 {
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+
+    body.light-mode .history-item h3 {
+      color: var(--primary-dark);
+    }
+
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      background-color: rgba(76, 175, 80, 0.1);
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+
+    body.light-mode .contact-icon {
+      color: var(--primary-dark);
+      background-color: rgba(56, 142, 60, 0.1);
+    }
+
+    .contact-icon:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
+    }
+
+    body.light-mode .contact-icon:hover {
+      background-color: var(--primary-dark);
+      box-shadow: 0 4px 8px rgba(56, 142, 60, 0.2);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 3px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    body.light-mode .theme-toggle {
+      background-color: var(--primary-dark);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.75rem;
+      }
+      
+      header p {
+        font-size: 0.9rem;
+      }
+      
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+      
+      nav a {
+        margin: 0 0.5rem;
+        font-size: 0.85rem;
+      }
+      
+      .card-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .section-title {
+        font-size: 1.3rem;
+      }
+      
+      .theme-toggle {
+        bottom: 1rem;
+        right: 1rem;
+        width: 36px;
+        height: 36px;
+      }
+      
+      .contact-icons {
+        gap: 1rem;
+      }
+      
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" id="themeToggle">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <header>
+    <h1>Asif Jamil</h1>
+    <p>Oracle Solutions Developer | APEX Specialist | Enterprise Systems</p>
+    <nav>
+      <a href="#about"><i class="fas fa-user"></i> About</a>
+      <a href="#skills"><i class="fas fa-code"></i> Skills</a>
+      <a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a>
+      <a href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
+      <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="card-container">
+      <section id="about" class="card">
+        <h2 class="section-title">Technical Profile</h2>
+        <p>Oracle developer specializing in APEX applications with experience building enterprise solutions for various industries.</p>
+        <p>Expertise in full-stack development with Oracle technologies, from database design to UI implementation.</p>
+      </section>
+
+      <section id="skills" class="card">
+        <h2 class="section-title">Core Technologies</h2>
+        <ul class="skills">
+          <li><i class="fas fa-database"></i> Oracle DB</li>
+          <li><i class="fas fa-layer-group"></i> APEX</li>
+          <li><i class="fab fa-js"></i> JavaScript</li>
+          <li><i class="fas fa-code"></i> PL/SQL</li>
+          <li><i class="fas fa-exchange-alt"></i> REST APIs</li>
+          <li><i class="fab fa-html5"></i> HTML5/CSS3</li>
+        </ul>
+      </section>
+    </div>
+
+    <section id="projects" class="card">
+      <h2 class="section-title">Key Projects</h2>
+      <ul class="project-list">
+        <li>
+          <strong>Falcon Task Management</strong>
+          Oracle APEX application for operations with real-time tracking.
+        </li>
+        <li>
+          <strong>FoxFlow Financial Suite</strong>
+          Integrated financial system with budgeting modules.
+        </li>
+        <li>
+          <strong>AIS Accounting System</strong>
+          Automated accounting workflows for businesses.
+        </li>
+      </ul>
+    </section>
+
+    <section id="experience" class="card">
+      <h2 class="section-title">Professional Experience</h2>
+      <div class="history-item">
+        <h3>Oracle Developer</h3>
+        <ul>
+          <li>Developing applications with Oracle APEX</li>
+          <li>Building database solutions</li>
+          <li>Creating integrated business applications</li>
+        </ul>
+      </div>
+      <div class="history-item">
+        <h3>Previously in Finance</h3>
+        <ul>
+          <li>Accounting systems experience</li>
+          <li>Financial process optimization</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="card">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-icons">
+        <a href="mailto:md.asifjamil5@gmail.com" class="contact-icon" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://linkedin.com/in/asifjamil5" target="_blank" class="contact-icon" title="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/yourusername" target="_blank" class="contact-icon" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Asif Jamil. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const icon = themeToggle.querySelector('i');
+    
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'light' || (!savedTheme && !systemPrefersDark)) {
+      body.classList.add('light-mode');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      
+      if (body.classList.contains('light-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'light');
+      } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>
