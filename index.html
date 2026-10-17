@@ -36,9 +36,7 @@
     }
 
     @media (max-width: 768px) {
-      html {
-        scroll-padding-top: 300px;
-      }
+      html { scroll-padding-top: 300px; }
     }
 
     body {
@@ -59,10 +57,8 @@
     body::before {
       content: '';
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       background: linear-gradient(135deg, rgba(26, 35, 39, 0.9) 0%, rgba(76, 175, 80, 0.2) 100%);
       z-index: -1;
     }
@@ -71,6 +67,7 @@
       background: linear-gradient(135deg, rgba(236, 239, 241, 0.9) 0%, rgba(139, 195, 74, 0.2) 100%);
     }
 
+    /* ---------------- FROZEN HEADER ---------------- */
     header {
       position: sticky;
       top: 0;
@@ -79,8 +76,8 @@
       padding: 1.5rem 20px;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(55, 71, 79, 0.5);
     }
 
@@ -97,9 +94,7 @@
       margin-bottom: 0.25rem;
     }
 
-    body.light-mode header h1 {
-      color: var(--primary-dark);
-    }
+    body.light-mode header h1 { color: var(--primary-dark); }
 
     header p {
       color: var(--gray);
@@ -111,9 +106,7 @@
       margin-right: auto;
     }
 
-    nav {
-      margin-top: 1.25rem;
-    }
+    nav { margin-top: 1.25rem; }
 
     nav a {
       color: var(--light);
@@ -126,80 +119,49 @@
       font-size: 0.9rem;
     }
 
-    body.light-mode nav a {
-      color: var(--dark);
-    }
-
-    nav a:hover {
-      color: var(--primary);
-    }
-
-    body.light-mode nav a:hover {
-      color: var(--primary-dark);
-    }
+    body.light-mode nav a { color: var(--dark); }
+    nav a:hover { color: var(--primary); }
+    body.light-mode nav a:hover { color: var(--primary-dark); }
 
     nav a::after {
       content: '';
       position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
+      width: 0; height: 2px;
+      bottom: 0; left: 0;
       background-color: var(--primary);
       transition: width 0.3s ease;
     }
 
-    body.light-mode nav a::after {
-      background-color: var(--primary-dark);
-    }
+    body.light-mode nav a::after { background-color: var(--primary-dark); }
+    nav a:hover::after { width: 100%; }
 
-    nav a:hover::after {
-      width: 100%;
-    }
-
+    /* ---------------- LAYOUT ---------------- */
     .container {
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 2rem;
     }
 
-    .section-title {
-      font-size: 1.5rem;
-      color: var(--primary);
-      margin-bottom: 1.25rem;
-      position: relative;
-      display: inline-block;
-      font-weight: 600;
-    }
-
-    body.light-mode .section-title {
-      color: var(--primary-dark);
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      width: 50%;
-      height: 3px;
-      bottom: -6px;
-      left: 0;
-      background: linear-gradient(90deg, var(--primary), transparent);
-      border-radius: 3px;
-    }
-
-    body.light-mode .section-title::after {
-      background: linear-gradient(90deg, var(--primary-dark), transparent);
-    }
-
     .card {
+      position: relative;
       background-color: var(--card-bg-dark);
-      padding: 1.5rem;
-      border-radius: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 1.6rem;
+      border-radius: 14px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
       border: 1px solid rgba(76, 175, 80, 0.2);
       flex: 1;
       backdrop-filter: blur(8px);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), transparent);
+      opacity: 0.75;
     }
 
     body.light-mode .card {
@@ -214,10 +176,39 @@
       border-color: rgba(76, 175, 80, 0.4);
     }
 
-    body.light-mode .card:hover {
-      box-shadow: 0 10px 25px rgba(56, 142, 60, 0.15);
+    body.light-mode .card:hover { box-shadow: 0 10px 25px rgba(56, 142, 60, 0.15); }
+
+    .section-title {
+      font-size: 1.45rem;
+      color: var(--primary);
+      margin-bottom: 1.35rem;
+      position: relative;
+      display: inline-block;
+      font-weight: 600;
+      letter-spacing: -0.2px;
     }
 
+    body.light-mode .section-title { color: var(--primary-dark); }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 50%; height: 3px;
+      bottom: -6px; left: 0;
+      background: linear-gradient(90deg, var(--primary), transparent);
+      border-radius: 3px;
+    }
+
+    body.light-mode .section-title::after {
+      background: linear-gradient(90deg, var(--primary-dark), transparent);
+    }
+
+    .section-title i {
+      margin-right: 0.45rem;
+      opacity: 0.85;
+    }
+
+    /* ---------------- BUTTONS ---------------- */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -235,13 +226,11 @@
       white-space: nowrap;
     }
 
-    body.light-mode .btn {
-      color: var(--lighter);
-    }
+    body.light-mode .btn { color: var(--lighter); }
 
     .btn:hover {
       background-color: var(--primary-dark);
-      box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+      box-shadow: 0 0 12px rgba(76, 175, 80, 0.35);
       transform: translateY(-1px);
     }
 
@@ -256,10 +245,9 @@
       border-color: var(--primary-dark);
     }
 
-    .btn-outline:hover {
-      background-color: rgba(76, 175, 80, 0.1);
-    }
+    .btn-outline:hover { background-color: rgba(76, 175, 80, 0.1); }
 
+    /* ---------------- SKILLS ---------------- */
     ul.skills {
       list-style: none;
       display: flex;
@@ -288,12 +276,73 @@
     ul.skills li:hover {
       background-color: var(--primary);
       color: var(--light);
-      transform: scale(1.03);
+      transform: scale(1.04);
     }
 
-    body.light-mode ul.skills li:hover {
-      background-color: var(--primary-dark);
+    body.light-mode ul.skills li:hover { background-color: var(--primary-dark); }
+
+    .skill-group { margin-bottom: 0.9rem; }
+    .skill-group:last-child { margin-bottom: 0; }
+
+    .skill-group h4 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--gray);
+      margin-bottom: 0.45rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
     }
+
+    .skill-group h4 i { color: var(--primary); font-size: 0.72rem; }
+    body.light-mode .skill-group h4 { color: var(--text-light); }
+    body.light-mode .skill-group h4 i { color: var(--primary-dark); }
+    .skill-group ul.skills { margin-top: 0; }
+
+    /* ---------------- ABOUT STATS ---------------- */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+    }
+
+    .stat {
+      background: rgba(76, 175, 80, 0.08);
+      border: 1px solid rgba(76, 175, 80, 0.22);
+      border-radius: 10px;
+      padding: 0.7rem 0.4rem;
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .stat:hover {
+      background: rgba(76, 175, 80, 0.16);
+      border-color: rgba(76, 175, 80, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .stat-num {
+      display: block;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.15;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 0.66rem;
+      color: var(--gray);
+      margin-top: 0.18rem;
+      letter-spacing: 0.03em;
+    }
+
+    body.light-mode .stat { background: rgba(56, 142, 60, 0.07); border-color: rgba(56, 142, 60, 0.2); }
+    body.light-mode .stat:hover { background: rgba(56, 142, 60, 0.14); }
+    body.light-mode .stat-num { color: var(--primary-dark); }
 
     .card-container {
       display: grid;
@@ -302,6 +351,387 @@
       margin-bottom: 1.5rem;
     }
 
+    /* ---------------- PROJECT TRACK (drag to scroll) ---------------- */
+    .track-hint {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: var(--gray);
+      margin-bottom: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    .track-hint span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .track-hint i { color: var(--primary); font-size: 0.78rem; }
+    body.light-mode .track-hint i { color: var(--primary-dark); }
+
+    .project-track {
+      display: flex;
+      gap: 1.1rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0.5rem 4px 1.2rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .project-track::-webkit-scrollbar { display: none; }
+
+    .project-track.dragging { cursor: grabbing; }
+    .project-track.dragging .project-card { cursor: grabbing; }
+
+    .project-card {
+      position: relative;
+      flex: 0 0 340px;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(160deg, rgba(38, 50, 56, 0.96), rgba(26, 35, 39, 0.96));
+      border: 1px solid rgba(76, 175, 80, 0.22);
+      border-radius: 14px;
+      padding: 1.35rem 1.35rem 1.2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    body.light-mode .project-card {
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.97), rgba(245, 248, 245, 0.97));
+      border: 1px solid rgba(207, 216, 220, 0.9);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), transparent);
+      opacity: 0.85;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(76, 175, 80, 0.22), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(76, 175, 80, 0.5);
+      box-shadow: 0 14px 32px rgba(76, 175, 80, 0.2);
+    }
+
+    .project-card:hover::after { opacity: 1; }
+
+    body.light-mode .project-card:hover {
+      box-shadow: 0 14px 32px rgba(56, 142, 60, 0.18);
+    }
+
+    .project-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.28), rgba(139, 195, 74, 0.1));
+      color: var(--primary);
+      border: 1px solid rgba(76, 175, 80, 0.32);
+      font-size: 1.05rem;
+      transition: transform 0.35s ease;
+    }
+
+    .project-card:hover .project-icon { transform: scale(1.08) rotate(-4deg); }
+
+    body.light-mode .project-icon {
+      background: linear-gradient(135deg, rgba(56, 142, 60, 0.18), rgba(139, 195, 74, 0.08));
+      color: var(--primary-dark);
+      border-color: rgba(56, 142, 60, 0.28);
+    }
+
+    .project-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--gray);
+      opacity: 0.75;
+    }
+
+    .project-card strong {
+      color: var(--primary);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.45rem;
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    body.light-mode .project-card strong { color: var(--primary-dark); }
+
+    .project-card p {
+      font-size: 0.87rem;
+      color: var(--text-dark);
+      margin-bottom: 0.85rem;
+    }
+
+    body.light-mode .project-card p { color: var(--text-light); }
+
+    .project-card .project-tags {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0 0 1.05rem;
+    }
+
+    .project-card .project-tags li {
+      background-color: rgba(76, 175, 80, 0.1);
+      color: var(--primary);
+      padding: 0.28rem 0.68rem;
+      border-radius: 16px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+
+    body.light-mode .project-card .project-tags li {
+      background-color: rgba(56, 142, 60, 0.1);
+      color: var(--primary-dark);
+      border: 1px solid rgba(56, 142, 60, 0.3);
+    }
+
+    .project-card .project-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .project-card .project-footer .btn {
+      font-size: 0.8rem;
+      padding: 0.45rem 0.95rem;
+    }
+
+    /* ---------------- PROJECT MODAL ---------------- */
+    .project-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .project-modal.open { display: flex; }
+
+    .project-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 12, 16, 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      animation: modalFade 0.3s ease both;
+    }
+
+    body.light-mode .project-modal-backdrop {
+      background: rgba(240, 244, 240, 0.6);
+    }
+
+    .project-modal-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 640px;
+      animation: modalPop 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+    }
+
+    .project-modal-body {
+      max-height: 86vh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      border-radius: 16px;
+    }
+
+    .project-modal-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s ease, background 0.2s ease;
+      z-index: 2;
+    }
+
+    .project-modal-close:hover {
+      transform: scale(1.1) rotate(90deg);
+      background: var(--primary-dark);
+    }
+
+    .project-card--modal {
+      cursor: default;
+      width: 100%;
+      flex: 1 1 auto;
+      padding: 2rem 2rem 1.6rem;
+      border-radius: 16px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      transform: none;
+    }
+
+    .project-card--modal:hover {
+      transform: none;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      border-color: rgba(76, 175, 80, 0.45);
+    }
+
+    .project-card--modal::after { display: none; }
+    .project-card--modal:hover .project-icon { transform: none; }
+    .project-card--modal strong { font-size: 1.2rem; }
+    .project-card--modal p { font-size: 0.95rem; }
+    .project-card--modal .project-icon { width: 52px; height: 52px; font-size: 1.2rem; }
+    .project-card--modal .project-footer .btn { font-size: 0.85rem; padding: 0.55rem 1.1rem; }
+
+    @keyframes modalFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: translateY(22px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ---------------- TIMELINE ---------------- */
+    .history-item {
+      position: relative;
+      padding-left: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .history-item:last-child { margin-bottom: 0; }
+
+    .history-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.45rem;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.18);
+    }
+
+    .history-item::after {
+      content: '';
+      position: absolute;
+      left: 5px; top: 1.55rem;
+      bottom: -1.4rem;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(76, 175, 80, 0.55), transparent);
+    }
+
+    .history-item:last-child::after { display: none; }
+
+    body.light-mode .history-item::before { box-shadow: 0 0 0 4px rgba(56, 142, 60, 0.15); }
+    body.light-mode .history-item::after { background: linear-gradient(to bottom, rgba(56, 142, 60, 0.5), transparent); }
+
+    .history-item h3 {
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+
+    body.light-mode .history-item h3 { color: var(--primary-dark); }
+
+    .history-item > p strong {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gray);
+      letter-spacing: 0.02em;
+    }
+
+    .history-item ul {
+      margin-top: 0.55rem;
+      padding-left: 1.1rem;
+      font-size: 0.9rem;
+    }
+
+    .history-item ul li { margin-bottom: 0.25rem; }
+
+    /* ---------------- CONTACT ---------------- */
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.1rem;
+    }
+
+    .contact-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      background-color: rgba(76, 175, 80, 0.1);
+      transition: all 0.3s ease;
+      font-size: 1.15rem;
+      text-decoration: none;
+      border: 1px solid rgba(76, 175, 80, 0.25);
+    }
+
+    body.light-mode .contact-icon {
+      color: var(--primary-dark);
+      background-color: rgba(56, 142, 60, 0.1);
+      border-color: rgba(56, 142, 60, 0.22);
+    }
+
+    .contact-icon:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(76, 175, 80, 0.35);
+    }
+
+    body.light-mode .contact-icon:hover {
+      background-color: var(--primary-dark);
+      box-shadow: 0 6px 14px rgba(56, 142, 60, 0.3);
+    }
+
+    /* ---------------- FOOTER ---------------- */
     footer {
       text-align: center;
       padding: 1.5rem 1rem;
@@ -317,116 +747,11 @@
       border-top: 1px solid rgba(207, 216, 220, 0.8);
     }
 
-    .project-list {
-      list-style: none;
-    }
-
-    .project-list li {
-      margin-bottom: 1.25rem;
-      padding-left: 1.25rem;
-      border-left: 2px solid var(--primary);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    body.light-mode .project-list li {
-      border-left: 2px solid var(--primary-dark);
-    }
-
-    .project-list li .project-main {
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-
-    .project-list li .project-action {
-      flex: 0 0 auto;
-      padding-top: 0.15rem;
-    }
-
-    .project-list li strong {
-      color: var(--primary);
-      font-weight: 600;
-      display: block;
-      margin-bottom: 0.25rem;
-      font-size: 1rem;
-    }
-
-    body.light-mode .project-list li strong {
-      color: var(--primary-dark);
-    }
-
-    .history-item {
-      margin-bottom: 1.25rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px dashed var(--dark-gray);
-    }
-
-    body.light-mode .history-item {
-      border-bottom: 1px dashed var(--light-gray);
-    }
-
-    .history-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .history-item h3 {
-      color: var(--primary);
-      margin-bottom: 0.25rem;
-      font-size: 1rem;
-    }
-
-    body.light-mode .history-item h3 {
-      color: var(--primary-dark);
-    }
-
-    .contact-icons {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .contact-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      background-color: rgba(76, 175, 80, 0.1);
-      transition: all 0.3s ease;
-      font-size: 1.1rem;
-      text-decoration: none;
-    }
-
-    body.light-mode .contact-icon {
-      color: var(--primary-dark);
-      background-color: rgba(56, 142, 60, 0.1);
-    }
-
-    .contact-icon:hover {
-      background-color: var(--primary);
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
-    }
-
-    body.light-mode .contact-icon:hover {
-      background-color: var(--primary-dark);
-      box-shadow: 0 4px 8px rgba(56, 142, 60, 0.2);
-    }
-
+    /* ---------------- THEME TOGGLE ---------------- */
     .theme-toggle {
       position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      width: 40px;
-      height: 40px;
+      bottom: 1.5rem; right: 1.5rem;
+      width: 40px; height: 40px;
       border-radius: 50%;
       background-color: var(--primary);
       color: var(--light);
@@ -445,78 +770,36 @@
       box-shadow: 0 3px 15px rgba(76, 175, 80, 0.3);
     }
 
-    body.light-mode .theme-toggle {
-      background-color: var(--primary-dark);
-    }
+    body.light-mode .theme-toggle { background-color: var(--primary-dark); }
 
+    body.modal-open { overflow: hidden; }
+
+    /* ---------------- RESPONSIVE ---------------- */
     @media (max-width: 768px) {
-      header h1 {
-        font-size: 1.75rem;
-      }
-      
-      header p {
-        font-size: 0.9rem;
-      }
-      
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem;
-      }
-      
-      nav a {
-        margin: 0 0.5rem;
-        font-size: 0.85rem;
-      }
-      
-      .card-container {
-        grid-template-columns: 1fr;
-      }
-      
-      .section-title {
-        font-size: 1.3rem;
-      }
-      
-      .theme-toggle {
-        bottom: 1rem;
-        right: 1rem;
-        width: 36px;
-        height: 36px;
-      }
-      
-      .contact-icons {
-        gap: 1rem;
-      }
-      
-      .contact-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .project-list li {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.75rem;
-      }
-      .project-list li .project-action {
-        align-self: flex-start;
-        padding-top: 0;
-      }
+      header h1 { font-size: 1.75rem; }
+      header p { font-size: 0.9rem; }
+      nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+      nav a { margin: 0 0.5rem; font-size: 0.85rem; }
+      .card-container { grid-template-columns: 1fr; }
+      .section-title { font-size: 1.25rem; }
+      .theme-toggle { bottom: 1rem; right: 1rem; width: 36px; height: 36px; }
+      .contact-icons { gap: 1rem; }
+      .contact-icon { width: 40px; height: 40px; font-size: 1rem; }
+      .stat-row { grid-template-columns: repeat(3, 1fr); }
+      .project-card { flex: 0 0 82vw; }
+      .project-modal { padding: 1rem 1rem; }
+      .project-modal-close { top: -10px; right: -6px; }
+      .project-card--modal { padding: 1.5rem 1.4rem 1.3rem; }
+      .project-card--modal strong { font-size: 1.05rem; }
     }
 
     .more-content { display: none; }
     .more-content.expanded { display: block; }
-    .expand-toggle { margin-top: 0.75rem; }
-    .project-list li .project-main p { margin-top: 0.75rem; }
-
+    .expand-toggle { margin-top: 1rem; }
   </style>
 </head>
 <body>
-  <button class="theme-toggle" id="themeToggle">
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
     <i class="fas fa-moon"></i>
   </button>
 
@@ -534,139 +817,210 @@
   </header>
 
   <div class="container">
+
+    <!-- ABOUT + SKILLS -->
     <div class="card-container">
       <section id="about" class="card">
-        <h2 class="section-title">Technical Profile</h2>
+        <h2 class="section-title"><i class="fas fa-id-badge"></i> Technical Profile</h2>
         <p>Software Developer with experience building and supporting business applications using Oracle APEX, Oracle Database, PL/SQL and web technologies.</p>
         <p>Experienced in ERP, HR, attendance, payroll, purchasing, inventory, accounting and healthcare systems, with a focus on reporting, system integration, troubleshooting and practical business solutions.</p>
         <p>MBA in Management Information Systems (MIS), combining technical development with business and financial process knowledge.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <span class="stat-num">4+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">10+</span>
+            <span class="stat-label">Projects Delivered</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">MBA</span>
+            <span class="stat-label">MIS Degree</span>
+          </div>
+        </div>
       </section>
+
       <section id="skills" class="card">
-        <h2 class="section-title">Core Technologies</h2>
-        <ul class="skills">
-          <li><i class="fas fa-database"></i> Oracle Database 12c/19c</li>
-          <li><i class="fas fa-layer-group"></i> Oracle APEX</li>
-          <li><i class="fas fa-code"></i> SQL & PL/SQL</li>
-          <li><i class="fas fa-file-alt"></i> Oracle Forms</li>
-          <li><i class="fas fa-chart-bar"></i> Oracle Reports</li>
-          <li><i class="fas fa-chart-line"></i> BI Publisher</li>
-          <li><i class="fas fa-chart-pie"></i> Jasper Reports</li>
-          <li><i class="fab fa-js"></i> JavaScript</li>
-          <li><i class="fab fa-html5"></i> HTML5 / CSS3</li>
-          <li><i class="fas fa-exchange-alt"></i> JSON & REST APIs</li>
-          <li><i class="fas fa-cubes"></i> Oracle E-Business Suite</li>
-          <li><i class="fas fa-database"></i> MySQL</li>
-          <li><i class="fab fa-windows"></i> Windows & Linux</li>
-          <li><i class="fas fa-project-diagram"></i> ERP Integration</li>
-          <li><i class="fas fa-file-invoice-dollar"></i> Financial Reporting</li>
-        </ul>
+        <h2 class="section-title"><i class="fas fa-layer-group"></i> Core Technologies</h2>
+
+        <div class="skill-group">
+          <h4><i class="fas fa-database"></i> Databases &amp; Query</h4>
+          <ul class="skills">
+            <li>Oracle Database 12c/19c</li>
+            <li>SQL &amp; PL/SQL</li>
+            <li>MySQL</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4><i class="fas fa-cubes"></i> Oracle Platforms</h4>
+          <ul class="skills">
+            <li>Oracle APEX</li>
+            <li>Oracle Forms</li>
+            <li>Oracle Reports</li>
+            <li>BI Publisher</li>
+            <li>Oracle E-Business Suite</li>
+            <li>Jasper Reports</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4><i class="fas fa-code"></i> Web &amp; Integration</h4>
+          <ul class="skills">
+            <li>JavaScript</li>
+            <li>HTML5 / CSS3</li>
+            <li>JSON &amp; REST APIs</li>
+            <li>ERP Integration</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4><i class="fas fa-server"></i> Systems &amp; Domains</h4>
+          <ul class="skills">
+            <li>Windows &amp; Linux</li>
+            <li>Financial Reporting</li>
+            <li>HR &amp; Payroll Systems</li>
+          </ul>
+        </div>
       </section>
     </div>
 
+    <!-- PROJECTS -->
     <section id="projects" class="card">
-      <h2 class="section-title">Key Projects</h2>
-      <ul class="project-list">
-        <li>
-          <div class="project-main">
-            <strong>PinScan — QR-Based Patient & Family Safety Solution</strong>
-            Built in collaboration with Telerad Bangladesh Ltd., PinScan helps reunite lost patients, children, or elderly individuals with their caregivers. A QR badge lets anyone scan with a smartphone to connect with the caregiver and see location guidance and next steps, while keeping personal contact information private. No app installation is required.
-            <ul class="skills"><li>Oracle APEX</li><li>QR Code Workflow</li><li>Privacy-Focused Safety</li><li>Location Assistance</li></ul>
+      <h2 class="section-title"><i class="fas fa-project-diagram"></i> Key Projects</h2>
+
+      <div class="track-hint">
+        <span><i class="fas fa-hand-pointer"></i> Drag to scroll</span>
+        <span><i class="fas fa-expand"></i> Click a card to expand</span>
+      </div>
+
+      <div class="project-track" id="projectTrack">
+
+        <article class="project-card">
+          <div class="project-head">
+            <span class="project-icon"><i class="fas fa-qrcode"></i></span>
+            <span class="project-num">01</span>
           </div>
-          <div class="project-action">
-            <a class="btn" href="https://telesoftbd.com/ords/r/lomi/pinscan/login" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open PinScan</a>
+          <strong>PinScan — QR-Based Patient &amp; Family Safety Solution</strong>
+          <p>PinScan is a QR-based patient and family safety solution designed to help reunite lost individuals—such as patients, children, or elderly persons—with their caregivers. A unique QR badge can be scanned by anyone using a smartphone, which then connects them to the caregiver and provides location guidance and next steps. The system prioritises privacy by keeping personal contact information hidden while enabling fast, secure assistance. No app installation is required, making it accessible to anyone with a smartphone camera.</p>
+          <ul class="project-tags"><li>Oracle APEX</li><li>QR Workflow</li><li>Privacy-Focused</li><li>Location Assistance</li></ul>
+          <div class="project-footer">
+            <a class="btn" href="https://telesoftbd.com/ords/r/lomi/pinscan/login" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
           </div>
-        </li>
-        <li>
-          <div class="project-main">
-            <strong>PathPilot — Family Safety & Location Sharing</strong>
-            A safety and location-sharing platform that helps families and trusted contacts stay connected. Users can view selected people’s real-time location and picture to support everyday safety and check-ins for children, elderly family members, and others who may need extra attention.
-            <ul class="skills"><li>Oracle APEX</li><li>Location Sharing</li><li>Family Safety</li></ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <span class="project-icon"><i class="fas fa-location-dot"></i></span>
+            <span class="project-num">02</span>
           </div>
-          <div class="project-action">
-            <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=94377" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open PathPilot</a>
+          <strong>PathPilot — Family Safety &amp; Location Sharing</strong>
+          <p>PathPilot is a family safety and location-sharing platform that keeps trusted contacts connected in real time. Users can share their live location and a profile picture with selected family members, enabling everyday check-ins and quick assistance when needed. The application is especially useful for monitoring children, elderly family members, or individuals who may require extra attention, providing peace of mind through simple, secure location sharing.</p>
+          <ul class="project-tags"><li>Oracle APEX</li><li>Location Sharing</li><li>Family Safety</li></ul>
+          <div class="project-footer">
+            <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=94377" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
           </div>
-        </li>
-        <li>
-          <div class="project-main">
-            <strong>HR Management System — Oracle APEX</strong>
-            Bilingual HR application with employee and leave tracking features.
-            <ul class="skills"><li>Oracle APEX</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <span class="project-icon"><i class="fas fa-users"></i></span>
+            <span class="project-num">03</span>
           </div>
-          <div class="project-action">
+          <strong>HR Management System — Oracle APEX</strong>
+          <p>The HR Management System is a bilingual (Bangla and English) application built on Oracle APEX that streamlines employee and leave management. It provides a centralised dashboard for maintaining employee records, tracking leave balances, and processing leave requests with approval workflows. The system also includes reporting features that help HR teams monitor attendance patterns and generate summaries for payroll and administrative purposes.</p>
+          <ul class="project-tags"><li>Oracle APEX</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          <div class="project-footer">
             <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=1265088" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
           </div>
-        </li>
-      </ul>
-      <div id="moreProjects" class="more-content">
-        <ul class="project-list">
-        <li>
-          <div class="project-main">
-            <strong>Accounting Information System — Oracle APEX</strong>
-            Financial system supporting accounting workflows and BI Publisher reporting.
-            <ul class="skills"><li>Oracle APEX</li><li>BI Publisher</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <span class="project-icon"><i class="fas fa-file-invoice-dollar"></i></span>
+            <span class="project-num">04</span>
           </div>
-          <div class="project-action">
+          <strong>Accounting Information System — Oracle APEX</strong>
+          <p>This Accounting Information System is a comprehensive financial application developed on Oracle APEX, designed to support core accounting workflows. It enables users to manage chart of accounts, journal entries, ledgers, and financial statements, while also integrating with BI Publisher for generating detailed, professional reports. The system provides accurate, real-time financial data to support decision-making and statutory reporting.</p>
+          <ul class="project-tags"><li>Oracle APEX</li><li>BI Publisher</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          <div class="project-footer">
             <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=1264481" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
           </div>
-        </li>
-        <li>
-          <div class="project-main">
-            <strong>Task Management Software — Oracle APEX</strong>
-            Task management application featuring data encryption, automated scheduling, performance dashboards and push notifications.
-            <ul class="skills"><li>Oracle APEX</li><li>JavaScript</li><li>BI Publisher</li><li>Push Notifications</li></ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <span class="project-icon"><i class="fas fa-list-check"></i></span>
+            <span class="project-num">05</span>
           </div>
-          <div class="project-action">
+          <strong>Task Management Software — Oracle APEX</strong>
+          <p>The Task Management Software is a feature-rich application built on Oracle APEX that helps teams organise, prioritise, and track their work. It includes data encryption for sensitive task information, automated scheduling to assign and remind users of deadlines, performance dashboards for monitoring progress, and push notifications to keep everyone informed. The system is designed to improve productivity and accountability across projects of any size.</p>
+          <ul class="project-tags"><li>Oracle APEX</li><li>JavaScript</li><li>BI Publisher</li><li>Push Notifications</li></ul>
+          <div class="project-footer">
             <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=221119" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
           </div>
-        </li>
-        <li>
-          <div class="project-main">
-            <strong>Chatting Application — Oracle APEX</strong>
-            Real-time chatting application with UI customization and animation.
-            <ul class="skills"><li>Oracle APEX</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Plugins</li></ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <span class="project-icon"><i class="fas fa-comments"></i></span>
+            <span class="project-num">06</span>
           </div>
-          <div class="project-action">
+          <strong>Chatting Application — Oracle APEX</strong>
+          <p>This real-time chatting application, developed with Oracle APEX, provides a seamless communication platform with extensive UI customisation options. Users can personalise their chat experience with themes, animations, and layout adjustments. The application supports instant messaging, online status indicators, and message history, making it suitable for both internal team collaboration and customer engagement scenarios.</p>
+          <ul class="project-tags"><li>Oracle APEX</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Plugins</li></ul>
+          <div class="project-footer">
             <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=56738" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
           </div>
-        </li>
-        <li>
-          <div class="project-main">
-            <strong>Personal Finance Manager — Oracle APEX</strong>
-            Tracks income, expenses and financial goals, with report visualizations and forecasting tools.
-            <ul class="skills"><li>Oracle APEX</li><li>BI Publisher</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <span class="project-icon"><i class="fas fa-wallet"></i></span>
+            <span class="project-num">07</span>
           </div>
-          <div class="project-action">
+          <strong>Personal Finance Manager — Oracle APEX</strong>
+          <p>The Personal Finance Manager is an Oracle APEX application that helps individuals take control of their financial health. It allows users to track income and expenses, set and monitor financial goals, and visualise their financial data through interactive reports and charts. The system also includes forecasting tools to project future cash flow and savings, empowering users to make informed financial decisions.</p>
+          <ul class="project-tags"><li>Oracle APEX</li><li>BI Publisher</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          <div class="project-footer">
             <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=287471" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
           </div>
-        </li>
-        <li>
-          <div class="project-main">
-            <strong>E-Commerce Application — Oracle APEX</strong>
-            Supports product purchasing, sales, customer orders and inventory management.
-            <ul class="skills"><li>Oracle APEX</li><li>HTML Reports</li><li>Inventory</li></ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <span class="project-icon"><i class="fas fa-cart-shopping"></i></span>
+            <span class="project-num">08</span>
           </div>
-          <div class="project-action">
+          <strong>E-Commerce Application — Oracle APEX</strong>
+          <p>This E-Commerce Application, built on Oracle APEX, provides a complete online shopping experience. It supports product browsing, cart management, secure checkout, and order processing, while also offering a robust administrative backend for managing products, inventory, customer orders, and sales analytics. The system is designed to be scalable and easy to maintain, making it suitable for small to medium-sized online stores.</p>
+          <ul class="project-tags"><li>Oracle APEX</li><li>HTML Reports</li><li>Inventory</li></ul>
+          <div class="project-footer">
             <a class="btn" href="http://teleradhis.selfip.com:8080/ords/r/biobio/a620622022041311355420762062287/login_desktop" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
           </div>
-        </li>
-        <li>
-          <div class="project-main">
-            <strong>Accounting Information System — Oracle Forms</strong>
-            Accounting solution for debit and credit transactions, journal vouchers, general ledger, income statement, balance sheet and ratio analysis.
-            <ul class="skills"><li>Oracle Forms 11g</li><li>Oracle Reports 11g</li><li>Java</li></ul>
-          </div>
-          <div class="project-action">
-            <a class="btn" href="https://github.com/ajb49/AIS.git" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> View Source on GitHub</a>
-          </div>
-        </li>
-        </ul>
-      </div>
-      <button type="button" class="btn expand-toggle" aria-expanded="false" aria-controls="moreProjects" onclick="toggleSection('moreProjects', this)"><i class="fas fa-plus"></i> Show More Projects</button>
+        </article>
 
+        <article class="project-card">
+          <div class="project-head">
+            <span class="project-icon"><i class="fas fa-calculator"></i></span>
+            <span class="project-num">09</span>
+          </div>
+          <strong>Accounting Information System — Oracle Forms</strong>
+          <p>This Accounting Information System, developed using Oracle Forms and Oracle Reports, provides a comprehensive solution for financial accounting. It covers the full accounting cycle, including debit and credit transactions, journal vouchers, general ledger maintenance, income statements, balance sheets, and ratio analysis. The system is built with Java integration for enhanced functionality and is designed to meet the rigorous demands of enterprise financial management.</p>
+          <ul class="project-tags"><li>Oracle Forms 11g</li><li>Oracle Reports 11g</li><li>Java</li></ul>
+          <div class="project-footer">
+            <a class="btn" href="https://github.com/ajb49/AIS.git" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
+          </div>
+        </article>
+
+      </div>
     </section>
 
+    <!-- EXPERIENCE -->
     <section id="experience" class="card">
-      <h2 class="section-title">Professional Experience</h2>
+      <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
+
       <div class="history-item">
         <h3>Software Developer | Telerad Bangladesh Ltd.</h3>
         <p><strong>September 2025 – Present</strong></p>
@@ -687,70 +1041,82 @@
           <li>Collaborate with the team and management to ensure smooth operation of all modules and reports.</li>
         </ul>
       </div>
+
       <div id="moreExperience" class="more-content">
-      <div class="history-item">
-        <h3>Software Engineer | Mononsoft</h3>
-        <p><strong>October 2024 – September 2025</strong></p>
-        <ul>
-          <li>Developed and maintained healthcare ERP applications, primarily for a DNA Diagnostic Center, using Oracle APEX.</li>
-          <li>Enhanced system features and performed debugging to resolve functional and technical issues.</li>
-          <li>Modified and optimized Oracle BI Publisher reports to improve data accuracy and performance.</li>
-          <li>Conducted problem-solving and root-cause analysis for application bugs and system inefficiencies.</li>
-          <li>Collaborated on system enhancements to support new business requirements and improve user experience.</li>
-          <li>Performed R&amp;D to propose innovative solutions for system performance and scalability.</li>
-          <li>Worked extensively with JSON and APIs to facilitate efficient data exchange and module integration.</li>
-          <li>Ensured seamless data flow and system reliability across ERP components.</li>
-          <li>Participated in end-to-end testing, deployment and user support for newly developed features.</li>
-          <li>Documented technical changes and system upgrades for ongoing support and knowledge sharing.</li>
-        </ul>
+        <div class="history-item">
+          <h3>Software Engineer | Mononsoft</h3>
+          <p><strong>October 2024 – September 2025</strong></p>
+          <ul>
+            <li>Developed and maintained healthcare ERP applications, primarily for a DNA Diagnostic Center, using Oracle APEX.</li>
+            <li>Enhanced system features and performed debugging to resolve functional and technical issues.</li>
+            <li>Modified and optimised Oracle BI Publisher reports to improve data accuracy and performance.</li>
+            <li>Conducted problem-solving and root-cause analysis for application bugs and system inefficiencies.</li>
+            <li>Collaborated on system enhancements to support new business requirements and improve user experience.</li>
+            <li>Performed R&amp;D to propose innovative solutions for system performance and scalability.</li>
+            <li>Worked extensively with JSON and APIs to facilitate efficient data exchange and module integration.</li>
+            <li>Ensured seamless data flow and system reliability across ERP components.</li>
+            <li>Participated in end-to-end testing, deployment and user support for newly developed features.</li>
+            <li>Documented technical changes and system upgrades for ongoing support and knowledge sharing.</li>
+          </ul>
+        </div>
+
+        <div class="history-item">
+          <h3>Executive (IT &amp; MIS) | National Polymer Industries PLC</h3>
+          <p><strong>December 2023 – October 2024</strong></p>
+          <ul>
+            <li>Improved and fixed issues in the Oracle Finance system on Oracle E-Business Suite.</li>
+            <li>Ensured the system ran smoothly and reliably for end users.</li>
+            <li>Created and maintained purchase and inventory reports using BI Publisher and Oracle Report Builder.</li>
+            <li>Installed and configured Oracle Database 19c to ensure performance, security and reliability.</li>
+            <li>Supported the team by troubleshooting complex issues and improving daily system usability.</li>
+          </ul>
+        </div>
+
+        <div class="history-item">
+          <h3>Software Engineer Trainee (Transformer) | ERA InfoTech Ltd.</h3>
+          <p><strong>August 2022 – December 2023</strong></p>
+          <ul>
+            <li>Worked on ERP software covering accounting, sales, purchasing, LC (Letter of Credit), fixed assets and office management.</li>
+            <li>Built easy-to-use applications using Oracle APEX and Oracle Database.</li>
+            <li>Helped design the database structure to store information properly and safely.</li>
+            <li>Created and organised important business reports on time using Oracle Report Builder.</li>
+            <li>Ensured each part of the ERP system worked well for daily business use.</li>
+          </ul>
+        </div>
       </div>
-      <div class="history-item">
-        <h3>Executive (IT &amp; MIS) | National Polymer Industries PLC</h3>
-        <p><strong>December 2023 – October 2024</strong></p>
-        <ul>
-          <li>Improved and fixed issues in the Oracle Finance system on Oracle E-Business Suite.</li>
-          <li>Ensured the system ran smoothly and reliably for end users.</li>
-          <li>Created and maintained purchase and inventory reports using BI Publisher and Oracle Report Builder.</li>
-          <li>Installed and configured Oracle Database 19c to ensure performance, security and reliability.</li>
-          <li>Supported the team by troubleshooting complex issues and improving daily system usability.</li>
-        </ul>
-      </div>
-      <div class="history-item">
-        <h3>Software Engineer Trainee (Transformer) | ERA InfoTech Ltd.</h3>
-        <p><strong>August 2022 – December 2023</strong></p>
-        <ul>
-          <li>Worked on ERP software covering accounting, sales, purchasing, LC (Letter of Credit), fixed assets and office management.</li>
-          <li>Built easy-to-use applications using Oracle APEX and Oracle Database.</li>
-          <li>Helped design the database structure to store information properly and safely.</li>
-          <li>Created and organized important business reports on time using Oracle Report Builder.</li>
-          <li>Ensured each part of the ERP system worked well for daily business use.</li>
-        </ul>
-      </div>
-      </div>
+
       <button type="button" class="btn expand-toggle" aria-expanded="false" aria-controls="moreExperience" onclick="toggleSection('moreExperience', this)"><i class="fas fa-plus"></i> Show More Experience</button>
     </section>
 
+    <!-- EDUCATION -->
     <section id="education" class="card">
-      <h2 class="section-title">Education & Professional Development</h2>
+      <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education &amp; Professional Development</h2>
+
       <div class="history-item">
         <h3>MBA — Management Information Systems (MIS)</h3>
-        Jagannath University
+        <p>Jagannath University</p>
       </div>
+
       <div id="moreEducation" class="more-content">
-      <div class="history-item">
-        <h3>BBA — Finance</h3>
-        ASA University Bangladesh
+        <div class="history-item">
+          <h3>BBA — Finance</h3>
+          <p>ASA University Bangladesh</p>
+        </div>
+        <div class="history-item">
+          <h3>Database Development &amp; Design (DDD)</h3>
+          <p>IsDB — 880-hour professional course, 2022</p>
+        </div>
       </div>
-      <div class="history-item">
-        <h3>Database Development & Design (DDD)</h3>
-        IsDB — 880-hour course, 2022
-      </div>
-      </div>
+
       <button type="button" class="btn expand-toggle" aria-expanded="false" aria-controls="moreEducation" onclick="toggleSection('moreEducation', this)"><i class="fas fa-plus"></i> Show More Education</button>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="card">
-      <h2 class="section-title">Contact</h2>
+      <h2 class="section-title"><i class="fas fa-envelope"></i> Get in Touch</h2>
+      <p style="text-align:center;max-width:640px;margin:0.5rem auto 0;color:var(--gray);font-size:0.92rem;">
+        Open to collaboration, consulting, and full-time opportunities in Oracle APEX development, ERP systems, and business application engineering.
+      </p>
       <div class="contact-icons">
         <a href="mailto:md.asifjamil5@gmail.com" class="contact-icon" title="Email">
           <i class="fas fa-envelope"></i>
@@ -769,34 +1135,154 @@
     <p>&copy; 2026 Asif Jamil. All rights reserved.</p>
   </footer>
 
-  <script>
+  <!-- PROJECT MODAL -->
+  <div class="project-modal" id="projectModal" aria-hidden="true">
+    <div class="project-modal-backdrop" data-close></div>
+    <div class="project-modal-inner" role="dialog" aria-modal="true" aria-label="Project details">
+      <button type="button" class="project-modal-close" data-close aria-label="Close">
+        <i class="fas fa-xmark"></i>
+      </button>
+      <div class="project-modal-body" id="projectModalBody"></div>
+    </div>
+  </div>
 
+  <script>
+    /* ---------- Expand / collapse sections ---------- */
     function toggleSection(sectionId, button) {
       const section = document.getElementById(sectionId);
       const expanded = section.classList.toggle('expanded');
       button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      const label = sectionId === 'moreProjects' ? 'Projects' :
-                    sectionId === 'moreExperience' ? 'Experience' : 'Education';
+      const label = sectionId === 'moreExperience' ? 'Experience' : 'Education';
       button.innerHTML = expanded
         ? '<i class="fas fa-minus"></i> Show Less ' + label
         : '<i class="fas fa-plus"></i> Show More ' + label;
     }
 
+    /* ---------- Project track: drag to scroll ---------- */
+    (function () {
+      const track = document.getElementById('projectTrack');
+      if (!track) return;
+
+      /* Prevent native link dragging from starting the drag inside the track */
+      track.querySelectorAll('a').forEach(a => { a.draggable = false; });
+
+      let isDown = false;
+      let startX = 0;
+      let startScroll = 0;
+      let didDrag = false;
+      let suppressClick = false;
+
+      track.addEventListener('pointerdown', (e) => {
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        isDown = true;
+        didDrag = false;
+        suppressClick = false;
+        startX = e.clientX;
+        startScroll = track.scrollLeft;
+        track.classList.add('dragging');
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        const dx = e.clientX - startX;
+        if (!didDrag && Math.abs(dx) > 6) didDrag = true;
+        if (didDrag) {
+          track.scrollLeft = startScroll - dx;
+          e.preventDefault();
+        }
+      });
+
+      window.addEventListener('pointerup', () => {
+        if (!isDown) return;
+        isDown = false;
+        track.classList.remove('dragging');
+        if (didDrag) suppressClick = true;
+      });
+
+      /* Expose flag so card click handlers can ignore post-drag clicks */
+      track._suppressClick = () => {
+        if (suppressClick) {
+          suppressClick = false;
+          return true;
+        }
+        return false;
+      };
+    })();
+
+    /* ---------- Project modal: click card to expand ---------- */
+    (function () {
+      const track = document.getElementById('projectTrack');
+      const modal = document.getElementById('projectModal');
+      const modalBody = document.getElementById('projectModalBody');
+      const closeBtn = modal.querySelector('.project-modal-close');
+      let lastFocused = null;
+
+      function openModal(card) {
+        lastFocused = card;
+        const clone = card.cloneNode(true);
+        clone.classList.add('project-card--modal');
+        clone.removeAttribute('id');
+        modalBody.innerHTML = '';
+        modalBody.appendChild(clone);
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        closeBtn.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        modalBody.innerHTML = '';
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+          lastFocused.focus();
+        }
+        lastFocused = null;
+      }
+
+      document.querySelectorAll('.project-card').forEach((card) => {
+        card.addEventListener('click', (e) => {
+          /* Ignore clicks that were actually drags */
+          if (track && track._suppressClick && track._suppressClick()) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
+          /* Let the Open Project link behave normally */
+          if (e.target.closest('a')) return;
+          openModal(card);
+        });
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]') || e.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closeModal();
+        }
+      });
+    })();
+
+    /* ---------- Theme toggle ---------- */
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
     const icon = themeToggle.querySelector('i');
-    
+
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
+
     if (savedTheme === 'light' || (!savedTheme && !systemPrefersDark)) {
       body.classList.add('light-mode');
       icon.classList.replace('fa-moon', 'fa-sun');
     }
-    
-    themeToggle.addEventListener('click', () => {
+
+    themeToggle.addEventListener('click', function () {
       body.classList.toggle('light-mode');
-      
       if (body.classList.contains('light-mode')) {
         icon.classList.replace('fa-moon', 'fa-sun');
         localStorage.setItem('theme', 'light');
