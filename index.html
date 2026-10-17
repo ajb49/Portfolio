@@ -31,6 +31,16 @@
       font-family: 'Inter', sans-serif;
     }
 
+    html {
+      scroll-padding-top: 220px;
+    }
+
+    @media (max-width: 768px) {
+      html {
+        scroll-padding-top: 300px;
+      }
+    }
+
     body {
       background: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
       background-size: cover;
@@ -62,11 +72,15 @@
     }
 
     header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       background-color: rgba(26, 35, 39, 0.95);
       padding: 1.5rem 20px;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(55, 71, 79, 0.5);
     }
 
@@ -218,6 +232,7 @@
       text-decoration: none;
       transition: all 0.3s ease;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     body.light-mode .btn {
@@ -310,10 +325,24 @@
       margin-bottom: 1.25rem;
       padding-left: 1.25rem;
       border-left: 2px solid var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
     }
 
     body.light-mode .project-list li {
       border-left: 2px solid var(--primary-dark);
+    }
+
+    .project-list li .project-main {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .project-list li .project-action {
+      flex: 0 0 auto;
+      padding-top: 0.15rem;
     }
 
     .project-list li strong {
@@ -466,6 +495,24 @@
         font-size: 1rem;
       }
     }
+
+    @media (max-width: 640px) {
+      .project-list li {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      .project-list li .project-action {
+        align-self: flex-start;
+        padding-top: 0;
+      }
+    }
+
+    .more-content { display: none; }
+    .more-content.expanded { display: block; }
+    .expand-toggle { margin-top: 0.75rem; }
+    .project-list li .project-main p { margin-top: 0.75rem; }
+
   </style>
 </head>
 <body>
@@ -475,12 +522,13 @@
 
   <header>
     <h1>Asif Jamil</h1>
-    <p>Oracle Solutions Developer | APEX Specialist | Enterprise Systems</p>
+    <p>Software Developer | Oracle APEX Specialist | ERP, HR & Financial Systems</p>
     <nav>
       <a href="#about"><i class="fas fa-user"></i> About</a>
       <a href="#skills"><i class="fas fa-code"></i> Skills</a>
       <a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a>
       <a href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
+      <a href="#education"><i class="fas fa-graduation-cap"></i> Education</a>
       <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
     </nav>
   </header>
@@ -489,19 +537,28 @@
     <div class="card-container">
       <section id="about" class="card">
         <h2 class="section-title">Technical Profile</h2>
-        <p>Oracle developer specializing in APEX applications with experience building enterprise solutions for various industries.</p>
-        <p>Expertise in full-stack development with Oracle technologies, from database design to UI implementation.</p>
+        <p>Software Developer with experience building and supporting business applications using Oracle APEX, Oracle Database, PL/SQL and web technologies.</p>
+        <p>Experienced in ERP, HR, attendance, payroll, purchasing, inventory, accounting and healthcare systems, with a focus on reporting, system integration, troubleshooting and practical business solutions.</p>
+        <p>MBA in Management Information Systems (MIS), combining technical development with business and financial process knowledge.</p>
       </section>
-
       <section id="skills" class="card">
         <h2 class="section-title">Core Technologies</h2>
         <ul class="skills">
-          <li><i class="fas fa-database"></i> Oracle DB</li>
-          <li><i class="fas fa-layer-group"></i> APEX</li>
+          <li><i class="fas fa-database"></i> Oracle Database 12c/19c</li>
+          <li><i class="fas fa-layer-group"></i> Oracle APEX</li>
+          <li><i class="fas fa-code"></i> SQL & PL/SQL</li>
+          <li><i class="fas fa-file-alt"></i> Oracle Forms</li>
+          <li><i class="fas fa-chart-bar"></i> Oracle Reports</li>
+          <li><i class="fas fa-chart-line"></i> BI Publisher</li>
+          <li><i class="fas fa-chart-pie"></i> Jasper Reports</li>
           <li><i class="fab fa-js"></i> JavaScript</li>
-          <li><i class="fas fa-code"></i> PL/SQL</li>
-          <li><i class="fas fa-exchange-alt"></i> REST APIs</li>
-          <li><i class="fab fa-html5"></i> HTML5/CSS3</li>
+          <li><i class="fab fa-html5"></i> HTML5 / CSS3</li>
+          <li><i class="fas fa-exchange-alt"></i> JSON & REST APIs</li>
+          <li><i class="fas fa-cubes"></i> Oracle E-Business Suite</li>
+          <li><i class="fas fa-database"></i> MySQL</li>
+          <li><i class="fab fa-windows"></i> Windows & Linux</li>
+          <li><i class="fas fa-project-diagram"></i> ERP Integration</li>
+          <li><i class="fas fa-file-invoice-dollar"></i> Financial Reporting</li>
         </ul>
       </section>
     </div>
@@ -510,37 +567,186 @@
       <h2 class="section-title">Key Projects</h2>
       <ul class="project-list">
         <li>
-          <strong>Falcon Task Management</strong>
-          Oracle APEX application for operations with real-time tracking.
+          <div class="project-main">
+            <strong>PinScan — QR-Based Patient & Family Safety Solution</strong>
+            Built in collaboration with Telerad Bangladesh Ltd., PinScan helps reunite lost patients, children, or elderly individuals with their caregivers. A QR badge lets anyone scan with a smartphone to connect with the caregiver and see location guidance and next steps, while keeping personal contact information private. No app installation is required.
+            <ul class="skills"><li>Oracle APEX</li><li>QR Code Workflow</li><li>Privacy-Focused Safety</li><li>Location Assistance</li></ul>
+          </div>
+          <div class="project-action">
+            <a class="btn" href="https://telesoftbd.com/ords/r/lomi/pinscan/login" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open PinScan</a>
+          </div>
         </li>
         <li>
-          <strong>FoxFlow Financial Suite</strong>
-          Integrated financial system with budgeting modules.
+          <div class="project-main">
+            <strong>PathPilot — Family Safety & Location Sharing</strong>
+            A safety and location-sharing platform that helps families and trusted contacts stay connected. Users can view selected people’s real-time location and picture to support everyday safety and check-ins for children, elderly family members, and others who may need extra attention.
+            <ul class="skills"><li>Oracle APEX</li><li>Location Sharing</li><li>Family Safety</li></ul>
+          </div>
+          <div class="project-action">
+            <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=94377" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open PathPilot</a>
+          </div>
         </li>
         <li>
-          <strong>AIS Accounting System</strong>
-          Automated accounting workflows for businesses.
+          <div class="project-main">
+            <strong>HR Management System — Oracle APEX</strong>
+            Bilingual HR application with employee and leave tracking features.
+            <ul class="skills"><li>Oracle APEX</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </div>
+          <div class="project-action">
+            <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=1265088" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
+          </div>
         </li>
       </ul>
+      <div id="moreProjects" class="more-content">
+        <ul class="project-list">
+        <li>
+          <div class="project-main">
+            <strong>Accounting Information System — Oracle APEX</strong>
+            Financial system supporting accounting workflows and BI Publisher reporting.
+            <ul class="skills"><li>Oracle APEX</li><li>BI Publisher</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </div>
+          <div class="project-action">
+            <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=1264481" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
+          </div>
+        </li>
+        <li>
+          <div class="project-main">
+            <strong>Task Management Software — Oracle APEX</strong>
+            Task management application featuring data encryption, automated scheduling, performance dashboards and push notifications.
+            <ul class="skills"><li>Oracle APEX</li><li>JavaScript</li><li>BI Publisher</li><li>Push Notifications</li></ul>
+          </div>
+          <div class="project-action">
+            <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=221119" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
+          </div>
+        </li>
+        <li>
+          <div class="project-main">
+            <strong>Chatting Application — Oracle APEX</strong>
+            Real-time chatting application with UI customization and animation.
+            <ul class="skills"><li>Oracle APEX</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Plugins</li></ul>
+          </div>
+          <div class="project-action">
+            <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=56738" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
+          </div>
+        </li>
+        <li>
+          <div class="project-main">
+            <strong>Personal Finance Manager — Oracle APEX</strong>
+            Tracks income, expenses and financial goals, with report visualizations and forecasting tools.
+            <ul class="skills"><li>Oracle APEX</li><li>BI Publisher</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </div>
+          <div class="project-action">
+            <a class="btn" href="https://apex.oracle.com/pls/apex/f?p=287471" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
+          </div>
+        </li>
+        <li>
+          <div class="project-main">
+            <strong>E-Commerce Application — Oracle APEX</strong>
+            Supports product purchasing, sales, customer orders and inventory management.
+            <ul class="skills"><li>Oracle APEX</li><li>HTML Reports</li><li>Inventory</li></ul>
+          </div>
+          <div class="project-action">
+            <a class="btn" href="http://teleradhis.selfip.com:8080/ords/r/biobio/a620622022041311355420762062287/login_desktop" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Open Project</a>
+          </div>
+        </li>
+        <li>
+          <div class="project-main">
+            <strong>Accounting Information System — Oracle Forms</strong>
+            Accounting solution for debit and credit transactions, journal vouchers, general ledger, income statement, balance sheet and ratio analysis.
+            <ul class="skills"><li>Oracle Forms 11g</li><li>Oracle Reports 11g</li><li>Java</li></ul>
+          </div>
+          <div class="project-action">
+            <a class="btn" href="https://github.com/ajb49/AIS.git" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> View Source on GitHub</a>
+          </div>
+        </li>
+        </ul>
+      </div>
+      <button type="button" class="btn expand-toggle" aria-expanded="false" aria-controls="moreProjects" onclick="toggleSection('moreProjects', this)"><i class="fas fa-plus"></i> Show More Projects</button>
+
     </section>
 
     <section id="experience" class="card">
       <h2 class="section-title">Professional Experience</h2>
       <div class="history-item">
-        <h3>Oracle Developer</h3>
+        <h3>Software Developer | Telerad Bangladesh Ltd.</h3>
+        <p><strong>September 2025 – Present</strong></p>
         <ul>
-          <li>Developing applications with Oracle APEX</li>
-          <li>Building database solutions</li>
-          <li>Creating integrated business applications</li>
+          <li>Manage employee attendance using biometric devices (ZK &amp; Futronic) and accurately track punch-in/out times.</li>
+          <li>Handle HR operations including payroll, loan deductions, and employee salary adjustments.</li>
+          <li>Develop and maintain Oracle APEX / PL/SQL database applications to insert, manage, and maintain data.</li>
+          <li>Create and maintain bilingual (Bangla and English) reports and templates for HR, ERP, finance and laboratory modules.</li>
+          <li>Configure and manage BI Publisher / Oracle Analytics reports for financial, HR and lab data.</li>
+          <li>Support ERP modules for schools, colleges and universities, including student, staff and finance management.</li>
+          <li>Integrate LIS lab devices into the system and process laboratory results accurately.</li>
+          <li>Perform loan and financial calculations, including monthly repayments and remaining balances.</li>
+          <li>Implement time and date calculations for attendance, payroll and report generation.</li>
+          <li>Maintain Windows desktops and servers, including notifications, watermarks and system alerts.</li>
+          <li>Ensure data accuracy across HR, ERP, LIS, Finance and Analytics systems.</li>
+          <li>Monitor system logins and manage access security with strong password practices.</li>
+          <li>Troubleshoot APEX dynamic actions, button triggers, page processes and data issues.</li>
+          <li>Collaborate with the team and management to ensure smooth operation of all modules and reports.</li>
+        </ul>
+      </div>
+      <div id="moreExperience" class="more-content">
+      <div class="history-item">
+        <h3>Software Engineer | Mononsoft</h3>
+        <p><strong>October 2024 – September 2025</strong></p>
+        <ul>
+          <li>Developed and maintained healthcare ERP applications, primarily for a DNA Diagnostic Center, using Oracle APEX.</li>
+          <li>Enhanced system features and performed debugging to resolve functional and technical issues.</li>
+          <li>Modified and optimized Oracle BI Publisher reports to improve data accuracy and performance.</li>
+          <li>Conducted problem-solving and root-cause analysis for application bugs and system inefficiencies.</li>
+          <li>Collaborated on system enhancements to support new business requirements and improve user experience.</li>
+          <li>Performed R&amp;D to propose innovative solutions for system performance and scalability.</li>
+          <li>Worked extensively with JSON and APIs to facilitate efficient data exchange and module integration.</li>
+          <li>Ensured seamless data flow and system reliability across ERP components.</li>
+          <li>Participated in end-to-end testing, deployment and user support for newly developed features.</li>
+          <li>Documented technical changes and system upgrades for ongoing support and knowledge sharing.</li>
         </ul>
       </div>
       <div class="history-item">
-        <h3>Previously in Finance</h3>
+        <h3>Executive (IT &amp; MIS) | National Polymer Industries PLC</h3>
+        <p><strong>December 2023 – October 2024</strong></p>
         <ul>
-          <li>Accounting systems experience</li>
-          <li>Financial process optimization</li>
+          <li>Improved and fixed issues in the Oracle Finance system on Oracle E-Business Suite.</li>
+          <li>Ensured the system ran smoothly and reliably for end users.</li>
+          <li>Created and maintained purchase and inventory reports using BI Publisher and Oracle Report Builder.</li>
+          <li>Installed and configured Oracle Database 19c to ensure performance, security and reliability.</li>
+          <li>Supported the team by troubleshooting complex issues and improving daily system usability.</li>
         </ul>
       </div>
+      <div class="history-item">
+        <h3>Software Engineer Trainee (Transformer) | ERA InfoTech Ltd.</h3>
+        <p><strong>August 2022 – December 2023</strong></p>
+        <ul>
+          <li>Worked on ERP software covering accounting, sales, purchasing, LC (Letter of Credit), fixed assets and office management.</li>
+          <li>Built easy-to-use applications using Oracle APEX and Oracle Database.</li>
+          <li>Helped design the database structure to store information properly and safely.</li>
+          <li>Created and organized important business reports on time using Oracle Report Builder.</li>
+          <li>Ensured each part of the ERP system worked well for daily business use.</li>
+        </ul>
+      </div>
+      </div>
+      <button type="button" class="btn expand-toggle" aria-expanded="false" aria-controls="moreExperience" onclick="toggleSection('moreExperience', this)"><i class="fas fa-plus"></i> Show More Experience</button>
+    </section>
+
+    <section id="education" class="card">
+      <h2 class="section-title">Education & Professional Development</h2>
+      <div class="history-item">
+        <h3>MBA — Management Information Systems (MIS)</h3>
+        Jagannath University
+      </div>
+      <div id="moreEducation" class="more-content">
+      <div class="history-item">
+        <h3>BBA — Finance</h3>
+        ASA University Bangladesh
+      </div>
+      <div class="history-item">
+        <h3>Database Development & Design (DDD)</h3>
+        IsDB — 880-hour course, 2022
+      </div>
+      </div>
+      <button type="button" class="btn expand-toggle" aria-expanded="false" aria-controls="moreEducation" onclick="toggleSection('moreEducation', this)"><i class="fas fa-plus"></i> Show More Education</button>
     </section>
 
     <section id="contact" class="card">
@@ -549,10 +755,10 @@
         <a href="mailto:md.asifjamil5@gmail.com" class="contact-icon" title="Email">
           <i class="fas fa-envelope"></i>
         </a>
-        <a href="https://linkedin.com/in/asifjamil5" target="_blank" class="contact-icon" title="LinkedIn">
+        <a href="https://linkedin.com/in/mdasifjamil5" target="_blank" rel="noopener noreferrer" class="contact-icon" title="LinkedIn">
           <i class="fab fa-linkedin-in"></i>
         </a>
-        <a href="https://github.com/yourusername" target="_blank" class="contact-icon" title="GitHub">
+        <a href="https://github.com/ajb49" target="_blank" rel="noopener noreferrer" class="contact-icon" title="GitHub">
           <i class="fab fa-github"></i>
         </a>
       </div>
@@ -560,10 +766,22 @@
   </div>
 
   <footer>
-    <p>&copy; 2025 Asif Jamil. All rights reserved.</p>
+    <p>&copy; 2026 Asif Jamil. All rights reserved.</p>
   </footer>
 
   <script>
+
+    function toggleSection(sectionId, button) {
+      const section = document.getElementById(sectionId);
+      const expanded = section.classList.toggle('expanded');
+      button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      const label = sectionId === 'moreProjects' ? 'Projects' :
+                    sectionId === 'moreExperience' ? 'Experience' : 'Education';
+      button.innerHTML = expanded
+        ? '<i class="fas fa-minus"></i> Show Less ' + label
+        : '<i class="fas fa-plus"></i> Show More ' + label;
+    }
+
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
     const icon = themeToggle.querySelector('i');
